@@ -615,13 +615,10 @@ export function animation_setup(animIdx, name, frameCount, speed) {
 
 export function asset_load_image(name, src, width, height) {
 	const img = new Image();
-	// img.onload = () => {
-	// 	util.context_get().drawImage(img,32, 32);
-	// } 
-	util.canvas_get().style.background=`url(${src})`;
+	img.onload = () => {}; 
+	img.src = src;
 	img.width = width;
 	img.height = height;
-	img.src = src;
 	settings.assetImageMap.set(name, img);
 	return img;
 }
