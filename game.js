@@ -97,8 +97,8 @@ game.setup = () => {
 		
 	}
 
-	be.asset_load_image("player_anim_walk", "assets/player_walk.png");
-	be.asset_load_image("enemy_anim_walk", "assets/enemy_walk.png");
+	be.asset_load_image("player_anim_walk", "assets/player_walk.png", 210, 43);
+	be.asset_load_image("enemy_anim_walk", "assets/enemy_walk.png", 210, 43);
 	be.asset_load_image("icon", "assets/icon.png");
 
 	for (let i = 0; i < CARD_AMOUNT; i += 1) {
