@@ -67,7 +67,7 @@ const ENEMY_Y_POS = SCENE_HEIGHT * 0.5;
 
 const gameData = {
 	field : [
-		0, 11, 2, -1, -1,
+		0, 1, 2, -1, -1,
 	 -3, 2, -1, 1, 0
 	],
 	playerStartPos: new be.Vector2(),
