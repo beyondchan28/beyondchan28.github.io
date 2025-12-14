@@ -104,6 +104,7 @@ export class Color{
 // all supported color name : https://www.w3schools.com/colors/colors_names.asp
 export const COLOR = {
     BLACK:      new Color(0, 0, 0, 1),
+    LIGHT_BLACK:      new Color(105, 105, 105, 1),
     WHITE:      new Color(255, 255, 255, 1),
     BLUE:       new Color(0, 0, 255, 1),
     RED:        new Color(255, 0, 0, 1),
@@ -531,7 +532,7 @@ class EngineSettings {
 		this.isPaused = false;
 		this.isDrawImage = true;
 		this.isDrawCollisionShape = true;
-		this.showFPS = true;
+		this.showFPS = false;
 
 		this.inputMap = new Map();
 		this.sceneMap = new Map();
@@ -613,12 +614,28 @@ export function animation_setup(animIdx, name, frameCount, speed) {
 }
 
 
+export function animation_change(entity, animName) {
+	const currAnim = component_get(entity.get_id(), COMPONENT_TYPE.ANIMATION);
+	currAnim.set_active(false);
+	for (let i= 0 ; i < currScene.cAnimations.length; i += 1) {
+		const animation = currScene.cAnimations[i];
+		if (animation.name == animName) {
+			animation.set_active(true);
+			entity.animationIdx = i;
+			// console.log(entity.animationIdx);
+			break;
+		}
+
+	}
+}
+
 export function asset_load_image(name, src, width, height) {
 	const img = new Image();
-	img.onload = () => {}; 
+	img.onload = () => {};
 	img.src = src;
 	img.width = width;
 	img.height = height;
+	// console.log(img.height);
 	settings.assetImageMap.set(name, img);
 	return img;
 }
@@ -640,7 +657,7 @@ export function camera_movement(vel) {
 
 export function collision_rect_debug(bb) {
 	const transform = component_get(bb.get_user(), COMPONENT_TYPE.TRANSFORM);
-	util.draw_stroke_rect(transform.pos, bb.size, COLOR.BLACK);
+	util.draw_stroke_rect(transform.pos, bb.size, COLOR.WHITE);
 }
 
 export function collision_rect_check(tIdx1, tIdx2, bbIdx1, bbIdx2) {
@@ -898,26 +915,6 @@ export function canvas_setup(canvas, width, height) {
 
 export function init() {
 	currScene.setup();
-	// for(const s of currScene.cSprites) {
-	// 	s.image.onload = () => {
-	// 		if (s.image.complete) {
-
-	// 		util.draw_image(s);
-	// 		}
-
-	// 	};
-	// }
-	// util.context_get().setTransform(1, 0, 0, 1, 0, 0);
-	// for(const a of currScene.cAnimations) {
-	// 	a.sprite.image.onload = () => {
-	// 		if (a.sprite.image.complete) {
-
-	// 			util.draw_image(a.sprite);
-	// 			console.log("F")
-	// 		}
-
-	// 	};
-	// }
 	// quad_tree_setup();
 	// camera_setup();
 	window.requestAnimationFrame(update);
@@ -1003,6 +1000,14 @@ function particle_update(particle) {
 function draw() {
 	// entities_y_sorted();
 
+	if (settings.isDrawCollisionShape) {
+		for (let bb of currScene.cBoundingBoxes) {
+			if (bb.is_active) {
+				collision_rect_debug(bb);
+			}
+		}
+	}
+
 	if (currScene.cSprites.length !== 0) {		
 		for (let s of currScene.cSprites) {
 			if (s.usedByAnimation) {
@@ -1030,6 +1035,24 @@ function draw() {
 		}
 	}
 
+	for (let i = 0; i < 3; i += 1) {
+		const card = entity_get(`card${i}`);
+		const card_size = new Vector2(64, 64);
+		const cardT = component_get(
+			card.get_id(), COMPONENT_TYPE.TRANSFORM
+		);
+		util.draw_rect(cardT.pos, card_size, COLOR.WHITE);
+	}
+
+	{
+		const rb = entity_get("RestartButton");
+		const rbSize = new Vector2(100, 50);
+		const rT = component_get(
+			rb.get_id(), COMPONENT_TYPE.TRANSFORM
+		);
+		util.draw_rect(rT.pos, rbSize, COLOR.WHITE);
+	}
+
 	if (currScene.cTexts.length !== 0) {		
 		for (let t of currScene.cTexts) {
 			if (t.is_active()) {
@@ -1038,14 +1061,6 @@ function draw() {
 		}
 	}
 
-
-	if (settings.isDrawCollisionShape) {
-		for (let bb of currScene.cBoundingBoxes) {
-			if (bb.is_active) {
-				collision_rect_debug(bb);
-			}
-		}
-	}
 }
 
 function collision() {
@@ -1097,7 +1112,7 @@ function update(timeStamp) {
 	}
 	
 	if (is_draw_image()) {
-		util.clear_background(COLOR.LIGHT_BLUE);
+		util.clear_background(COLOR.LIGHT_BLACK);
 		draw();
 		// util.context_get().restore(); // related to camera/canvas movement/translate implementation this
 	}

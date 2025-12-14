@@ -1,5 +1,5 @@
 #canvas {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: block;
   margin: auto;
 }
@@ -13,7 +13,11 @@
 
 .column {
   padding: 20px;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
+}
+
+body {
+  background-color: #454545;
 }
 
 /*#center-panel {

@@ -98,8 +98,6 @@ function save_json() {
 	generate_file(JSON.stringify(saveFormat, null, "\t"), "save_file.json");
 }
 
-document.body.style.backgroundColor = '#454545';
-
 const allElements = document.querySelectorAll("*");
 
 allElements.forEach( (element) => {
