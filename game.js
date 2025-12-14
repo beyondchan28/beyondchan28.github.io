@@ -20,12 +20,20 @@ class Scheduler {
 	}
 
 	tick(dt) {
-		for (const co of [...this.coroutines]) {
+		const cors = [...this.coroutines];
+
+		const coroutinesTotal = cors.length;
+		let count = 0;
+
+		for (const co of cors ) {
 			const { done } = co.next(dt);
 			if (done) {
+				count += 1;
 				this.coroutines.delete(co);
-				this.finish();
 			}
+		}
+		if (coroutinesTotal != 0 && count == coroutinesTotal) {
+			this.finish();
 		}
 	} 
 }
@@ -34,10 +42,7 @@ const SCENE_WIDTH = 1280;
 const SCENE_HEIGHT = 720;
 
 // TODO:
-// - reset and win-lose condition when someone already reach finish
-// - make it looks decent 
 // - support sound
-// - main menu (optional) and exit
 
 be.canvas_setup("canvas", SCENE_WIDTH, SCENE_HEIGHT); // assigning canvas, context, and its size 
 const menuScene = be.scene_create("Menu"); // creating scene (with GUI-only type of components)
@@ -62,8 +67,8 @@ const ENEMY_Y_POS = SCENE_HEIGHT * 0.5;
 
 const gameData = {
 	field : [
-		0, 1, 2, 0, -1,
-	 -3, 0, -1, 1, 0
+		0, 11, 2, -1, -1,
+	 -3, 2, -1, 1, 0
 	],
 	playerStartPos: new be.Vector2(),
 	enemyStartPos: new be.Vector2(),
@@ -71,6 +76,7 @@ const gameData = {
 	playerFieldIdx: 0,
 	enemyFieldIdx: 0
 }
+console.log(gameData);
 const START_X_POS = (SCENE_WIDTH / 2.0) - (gameData.field.length * BASE_DISTANCE) / 2;
 
 let multiplier = 0;
@@ -93,6 +99,16 @@ finishText.tint = be.COLOR.RED;
 finishText.pos.x = SCENE_WIDTH / 2 - 325;
 finishText.pos.y = SCENE_HEIGHT / 2 - 50;
 finishText.set_active(false);	
+
+const sounds = new Map();
+
+sounds.set("button", new Audio("assets/button.ogg"));
+sounds.set("change_entity", new Audio("assets/change_entity.ogg"));
+sounds.set("walk", new Audio("assets/walk.ogg"));
+sounds.set("win", new Audio("assets/win.ogg"));
+
+// const buttonSound = new Audio("assets/button.ogg");
+// buttonSound.volume = 0.5;
 
 game.setup = () => {
 	be.input_press_create("X", be.KEY.SPACE);
@@ -186,44 +202,44 @@ game.setup = () => {
 		} else if (entityToPlay.get_name() === "Enemy") {
 			fieldIndex = gameData.enemyFieldIdx;
 		}
-		const fieldMultiplier = gameData.field[fieldIndex];
 
-
-		console.log("BEFORE : ",gameData);
-		// console.log(fieldMultiplier);
+		
+		let fieldMultiplier = gameData.field[fieldIndex];
+		if(fieldMultiplier + fieldIndex > gameData.field.length) {
+			fieldMultiplier = gameData.field.length - 1 - fieldIndex ;
+		}
+		manipulate_field_index(fieldMultiplier);
 		fieldEffectPos.x += BASE_DISTANCE * fieldMultiplier;
 		fieldScheduler.start( () => ( move(transfrom, fieldEffectPos, 1) ) );
-		manipulate_field_index(fieldMultiplier);
-		console.log("AFTER : ", gameData);
 	}
 
 	fieldScheduler.finish = () => {
-		console.log("[INFO] CHANGE ENTITY TO PLAY")
 		if (
 			gameData.playerFieldIdx == gameData.field.length - 1 ||
 			gameData.enemyFieldIdx == gameData.field.length - 1
 			) 
 		{
-			
 			finishText.set_active(true);
-			return;
+			canMove = true;
+			sounds.get("win").play();
+		} else {
+			console.log("[INFO] CHANGE ENTITY TO PLAY")
+			sounds.get("change_entity").play();
+			be.animation_change(entityToPlay, entityToPlay.get_name() + "Idle");
 
+			if (entityToPlay.get_name() === "Player") {
+				entityToPlay = be.entity_get("Enemy");
+				turnText.text = "BOT TURN";
+			} else if (entityToPlay.get_name() === "Enemy") {
+				entityToPlay = be.entity_get("Player");
+				turnText.text = "TOP TURN";
+			}
+
+			be.animation_change(entityToPlay, entityToPlay.get_name() + "Walk");
+
+
+			canMove = true;
 		}
-
-		be.animation_change(entityToPlay, entityToPlay.get_name() + "Idle");
-
-		if (entityToPlay.get_name() === "Player") {
-			entityToPlay = be.entity_get("Enemy");
-			turnText.text = "BOT TURN";
-		} else if (entityToPlay.get_name() === "Enemy") {
-			entityToPlay = be.entity_get("Player");
-			turnText.text = "TOP TURN";
-		}
-
-		be.animation_change(entityToPlay, entityToPlay.get_name() + "Walk");
-
-
-		canMove = true;
 	}
 
 	for (let j = 0; j < 2; j += 1){
@@ -279,6 +295,26 @@ function is_restart_button_pressed() {
 	if (button.is_active() === true) {
 		button.set_active(false);
 
+
+		const player = be.entity_get("Player");
+		const playerT = be.component_get(player.get_id(), be.COMPONENT_TYPE.TRANSFORM);
+		playerT.pos.x = gameData.playerStartPos.x; 
+		playerT.pos.y = gameData.playerStartPos.y; 
+		be.animation_change(player, "PlayerWalk");
+
+		const enemy = be.entity_get("Enemy");
+		const enemyT = be.component_get(enemy.get_id(), be.COMPONENT_TYPE.TRANSFORM);
+		enemyT.pos.x = gameData.enemyStartPos.x; 
+		enemyT.pos.y = gameData.enemyStartPos.y; 
+		be.animation_change(enemy, "EnemyIdle");
+
+		gameData.playerFieldIdx = 0;
+		gameData.enemyFieldIdx = 0;
+		turnText.text = "TOP TURN";
+
+		finishText.set_active(false);
+		entityToPlay = player;
+
 		canMove = true;
 
 		console.log("Game Restarted ");
@@ -330,10 +366,10 @@ game.input = () => {
 
 // used for game logic such as movement, physics, enemies, etc. 
 game.update = (dt) => {
+	is_restart_button_pressed();
 	if (canMove === true) {
 		check_card_pressed();
 	}
-	is_restart_button_pressed();
 	scheduler.tick(dt);
 	fieldScheduler.tick(dt);
 };
@@ -354,8 +390,17 @@ function check_card_pressed() {
 }
 
 function use_card(cardId) {
-	const multiplier = cardId + 1;
+	let multiplier = cardId + 1;
+	let playIdx
+	if (entityToPlay.get_name() === "Player") {
+		playIdx = gameData.playerFieldIdx;
+	} else {
+		playIdx = gameData.enemyFieldIdx;
+	}
 
+	if(multiplier + playIdx > gameData.field.length) {
+		multiplier = gameData.field.length - playIdx;
+	}
 	manipulate_field_index(multiplier);
 
 	const cardTransform = be.component_get(entityToPlay.get_id(), be.COMPONENT_TYPE.TRANSFORM);
@@ -374,6 +419,7 @@ function manipulate_field_index(multiplier) {
 		} else {
 			gameData.playerFieldIdx = gameData.field.length - 1;
 		}
+		return gameData.player
 
 	} else if (entityToPlay.get_name() === "Enemy") {
 		if (gameData.enemyFieldIdx + multiplier < gameData.field.length) {
@@ -394,6 +440,7 @@ function* move(entityTransform, to, duration) {
     entityTransform.pos.x = be.lerp(entityTransform.pos.x, to.x, t);
     entityTransform.pos.y = be.lerp(entityTransform.pos.y, to.y, t);
   }
+  sounds.get("walk").play();
 }
 
 function mouse_detect_in_bounding_boxes(event) {
@@ -421,6 +468,7 @@ function mouse_detect_in_bounding_boxes(event) {
 			);
 			if (event.type == "click" && isMouseInside) {
 				entBBS.set_active(true);
+				sounds.get("button").play();
 			}
 			else {
 				if (entBBS.is_active() === true)
