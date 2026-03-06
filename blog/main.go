@@ -57,7 +57,7 @@ const Main string = ` <main class="main-content">
 const BlogList string = `<ul class="blog-list" id="blog-list"> %s </ul>`
 
 func writeHTML(content, fileName string) {
-	saveDir := "./pages/blogsHTML/"
+	saveDir := "../"
 	html := Head + content + Foot
 	err := os.WriteFile(saveDir+fileName, []byte(html), 0644)
 	if err != nil {
@@ -66,7 +66,7 @@ func writeHTML(content, fileName string) {
 }
 
 func addPage(pg *[]PageData, filename string) {
-	blogDir := "./pages/blogs/"
+	blogDir := "./xdfiles/"
 	page := PageData{}
 	page.ReadXDFileNative(blogDir + filename + ".xd")
 	*pg = append(*pg, page)
@@ -75,7 +75,7 @@ func addPage(pg *[]PageData, filename string) {
 func main() {
 	// NOTE: Generate index HTML
 	front := PageData{}
-	front.ReadXDFileNative("./pages/front.xd")
+	front.ReadXDFileNative("./xdfiles/front.xd")
 
 	title, date, body, footer := front.GenerateHTML()
 	frontContent := fmt.Sprintf(Main, title, date, body, footer)
