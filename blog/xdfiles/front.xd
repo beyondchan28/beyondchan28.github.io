@@ -1,0 +1,51 @@
+[title]
+Welcome to My Blog
+
+[date]
+Blog about programming, game development, and everything in between.
+
+[chapter]
+Hello there...
+
+[paragraph]
+My name is Chandra Gunawan.
+
+[paragraph]
+I'm a human with love, skill, and passion in programming.
+
+[paragraph]
+Mostly experienced as a game programmer/developer.
+
+[paragraph]
+Making not only games, but also trying to write my own game engine (also used as thesis for my undergraduate degree).
+
+[paragraph]
+Also founding indie game studios here and there. Most of the game are made with Godot Engine <3
+
+[paragraph]
+Currently in a way to switch myself to be a Golang Developer.
+
+[paragraph]
+This blog made with Golang and compiled down to WASM with my own flavour of Markdown file called XD.
+
+[section]
+Here's where you can find me
+
+[list]
+Email     : <a href="mailto:chandragunawan.work@gmail.com">Send mail to me</a>
+[list]
+Github    : <a href="https://github.com/beyondchan28">beyondchan28</a>
+[list]
+Itch      : <a href="https://beyonddd.itch.io/">beyonddd</a>
+[list]
+UpWork    : <a href="https://www.upwork.com/freelancers/~01dc3e09a38327e178?mp_source=share">Chandra Gunawan - Godot Developer</a>
+[list]
+LinkedIn  : <a href="https://www.linkedin.com/in/chandragunawann/">Chandra Gunawan</a>
+[list]
+Instagram : <a href="https://www.instagram.com/thegravital">thegravital</a>
+
+[paragraph]
+My one and only motto is "To Infinity and Beyonddd!"
+
+[footer]
+iliketorantsometimessoexcusemeformywordofchoicesididntmeantohurtanyoneimjustexpressingmyfrustation
