@@ -90,7 +90,6 @@ func main() {
 
 	for idx, pg := range pages {
 		fileName := fmt.Sprintf("page%d.html", idx)
-		fmt.Println(fileName)
 		title, date, body, footer := pg.GenerateHTML()
 		content := fmt.Sprintf(Main, title, date, body, footer)
 		writeHTML(content, fileName)

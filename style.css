@@ -42,7 +42,7 @@ header {
   margin-bottom: 25px;
 }
 
-.post-meta {
+.post-meta i {
   color: #777;
   font-size: 0.9rem;
   margin-top: 8px;
@@ -56,6 +56,7 @@ header {
 
   max-width: 70ch;
   margin: 0 auto;
+  text-align: justify;
 
   overflow-wrap: break-word;
   word-break: break-word;
@@ -80,9 +81,13 @@ pre {
 .post-footer {
   margin-top: 50px;
   padding-top: 15px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #fff;
   font-size: 0.9rem;
-  color: #555;
+  color: #777;
+}
+
+.post-footer em {
+  color: #777;
 }
 
 footer {
@@ -161,3 +166,25 @@ footer {
   font-size: 0.9rem;
   color: #777;
 }
+
+.blog-image {
+  width: 100%;
+  text-align: center;
+}
+
+.blog-image img {
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.blog-image figcaption {
+  font-size: 14px;
+  color: #777;
+  text-align: center;
+  margin-top: 8px;
+  padding: 0 10px;
+}
+

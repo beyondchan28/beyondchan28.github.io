@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"slices"
+	"strings"
 )
 
 type Flag uint8
@@ -22,6 +23,7 @@ const (
 	TASKFALSE
 	LIST
 	FOOTER
+	IMAGE
 )
 
 type PageMap map[Flag][]int //
@@ -58,6 +60,8 @@ func (pd *PageData) addData(flag string) {
 		currentFlag = CODE
 	case "footer":
 		currentFlag = FOOTER
+	case "image":
+		currentFlag = IMAGE
 	default:
 		panic("[ERROR] Flag is not valid: " + flag)
 	}
@@ -104,27 +108,31 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 	case FOOTER:
 		openTag = "<em>"
 		closeTag = "</em>"
+	case IMAGE:
+		openTag = `<figure class="blog-image">
+		<img src=%s alt=%s>
+		<figcaption>`
+		closeTag = "</figcaption></figure>"
 	default:
 		panic("[ERROR] Flag is not valid")
 	}
 
 	var text string
-	if len(indexes) == 1 {
-		textIndex := indexes[0]
-		text = pd.texts[textIndex]
-	} else {
-		for _, textIndex := range indexes {
 
-			text += pd.texts[textIndex]
-			if flag == CODE {
-				text += "\n"
-			}
-			if slices.Contains(pd.newLineIndex, textIndex+1) {
-				text += "\n"
-			}
+	for _, textIndex := range indexes {
+		text += pd.texts[textIndex]
+		if flag == CODE {
+			text += "\n"
+		} else if flag == IMAGE {
+			split := strings.Split(text, "^")
+			fmt.Println("TF : ", split[2])
+			text = split[2]
+			openTag = fmt.Sprintf(openTag, split[0], split[1])
+		}
+		if slices.Contains(pd.newLineIndex, textIndex+1) {
+			text += "\n"
 		}
 	}
-
 	return openTag + text + closeTag
 }
 
@@ -138,6 +146,7 @@ func (pd *PageData) readLine(reader io.Reader) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
+
 		pd.texts = append(pd.texts, line)
 	}
 
