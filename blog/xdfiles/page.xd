@@ -1,66 +1,81 @@
 [title]
-This is H1
+Make a Simple Personal Blog System in Go
 
 [date]
-Published on Sunday, January 1st 2026
+Published on Saturday, March 14th 2026
+
+[paragraph]
+There is a lot of ways to create your own blog these days. Most people would most likely do it in some combo of frameworks.
+But for personal use, you have a complete choice to use any technology you want.
+In this blog, i will tell you the simplest way to make your personal blog in Go without any dependency or third party library.
 
 [chapter]
-This is H2
-
-[section]
-This is H3
-
-[image]
-../blog/images/godot.png^Godot Engine^This is the caption of the image
+Design The Page
 
 [paragraph]
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+First of all, we have to make the design of our web page in HTML and CSS. Because, if we bad at CSS (i'm suck on CSS), we can use LLM to do it for us. Make sure to have specific web page design in mind before prompting. For example, I like to make it simple and comfortable to read, so i design my web page (literally this blog) to be the same as a paper page inside a book. After we finish the design, we can proceed to the next step.
 
-[image]
-../blog/images/index.png^Godot Engine^This is the caption of the image
+[chapter]
+File Format for The Blog's Content
 
 [paragraph]
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+Before we make the system, we had to choose a file format for you to write your blog's contents. This is can be a huge advantage because it's easier to write in rather than directly in the HTML file. The most common file format is Markdown file. Markdown is used everywhere these days. From README file, to prompting and organize Coding Agent. So, if you don't know it yet, learning Markdown can be a good knowledge to have.
 
-[blockquote]
-This is blockquote
+[paragraph]
+But for this blog, we will use my own file format called XD. This file format much more simpler than Markdown and i like to make my own solution rather than using an existing one (I'm highly recommend you to do the same way :)). This file format literally just a way to tag a specific part of the blog's content and later will be injected to predefined HTML tag. Here's are all the tag:
 
-[taskfalse]
-this is UNCHECKED task
+[image]
+../blog/images/xd_file_format.png^XD file tag^Tag of XD File
 
-[tasktrue]
-this is CHECKED task
+[chapter]
+Parser for The File Format
+
+[paragraph]
+After that, we can create the parser for the file format. For this case its called XD Parser. To do it, first, we have to open and store everyline of text inside the XD file. And then store every tag and every line below it. Here's the code to read the XD file, read every line, check tags, and the store it.
+
+
+[image]
+../blog/images/parse_xd.png^Parse XD File^Parsing XD file
+
+[paragraph]
+As i said before, every tag will be translated to predefined HTML tag. For example tag "TITLE" will be translated to "h1", tag "CHAPTER" to "h2", and so on. Here's the implementation.
+
+[image]
+../blog/images/xd_to_tag.png^XD tag to HTML tag^XD tag to HTML tag
+
+[paragraph]
+The result of parsing the XD file is stored a multiline string. Simple.
+
+[paragraph]
+If the parser is done, we can proceed to the next step.
+
+[chapter]
+The Blog System
+
+[paragraph]
+The idea of the blog system is really simple. We just need to make a system that compose the HTML file based on our file format. So, all we need is a way to crate a file and write the file from generated strings that we had from our parser and then save it with .html file extension. Here's the implementation.
+
+[image]
+../blog/images/xd_to_html.png^Parsed data to HTML^Parsed data to HTML
+
+[paragraph]
+The function receive the data we got from the parser and the name of its files. And also, The "Head" and "Foot" variables are based on our design in the first step, so the generated HTML files are on the same look and design (like this blog).
+
+[paragraph]
+After all that, we can run the program with command "go run" to get our generated HTML file.
+
+[chapter]
+Conclusion
+
+[paragraph]
+That's how to make a simple personal blog in Go with custom file format. When writing this blog, i realize that this system also can be used to generate manual for a library/framework.
+
+[paragraph]
+I'm sorry if there is something confusing or doesn't make sense. I'm just starting out on writing technical post. If you had any feedbacks, feel free to DM me on my social media or you can email (can be found on the front page). Thank you for reading this and i hope you learn something new. See you :)
 
 [list]
-this is list
-
-[code]
-func main() {
-	engine := Engine{}
-	engine.ready()
-
-	pos1 := Vec2{x: 10.0, y: 10.0}
-	pos2 := Vec2{x: 20.0, y: 20.0}
-
-	dot := pos1.dot(&pos2)
-
-	fmt.Println(dot)
-	fmt.Println(pos1)
-	fmt.Println(pos2)
-
-	c1 := componentCreate(TRANSFORM)
-	c2 := componentCreate(BOUNDING_BOX)
-
-	t := Transform{}
-	t.position = Vec2{10, 10}
-	fmt.Println(t.position)
-	fmt.Printf("type: %v\n", c1.getType())
-	fmt.Printf("type: %v\n", c2.getType())
-	select {}
-}
-
-[paragraph]
-Ending the blog bla bla bla.
+Project link : <a href="https://github.com/beyondchan28/beyondchan28.github.io/tree/main/blog">Blog and XD Parser</a>
 
 [footer]
 Tag: Golang, Website, XD Parser
+

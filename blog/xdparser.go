@@ -146,7 +146,6 @@ func (pd *PageData) readLine(reader io.Reader) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-
 		pd.texts = append(pd.texts, line)
 	}
 
@@ -154,7 +153,7 @@ func (pd *PageData) readLine(reader io.Reader) {
 		// check for Tag
 		if len(text) != 0 && text[0] == '[' {
 			flag := text[1 : len(text)-1]
-			pd.addData(flag)
+			pd.addData(flag) // store the flag
 			//check for new line
 		} else if len(text) == 0 {
 			pd.newLineIndex = append(pd.newLineIndex, index)

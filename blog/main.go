@@ -58,6 +58,7 @@ const BlogList string = `<ul class="blog-list" id="blog-list"> %s </ul>`
 
 func writeHTML(content, fileName string) {
 	saveDir := "../"
+	// Head is the top part of the HTML and Foot is the bottom part of HTML
 	html := Head + content + Foot
 	err := os.WriteFile(saveDir+fileName, []byte(html), 0644)
 	if err != nil {
@@ -84,8 +85,6 @@ func main() {
 
 	//NOTE: Prepare Blog page
 	var pages []PageData
-	addPage(&pages, "page")
-	addPage(&pages, "page")
 	addPage(&pages, "page")
 
 	for idx, pg := range pages {
