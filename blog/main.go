@@ -21,6 +21,7 @@ const Head string = `<!DOCTYPE html>
 <ul class="nav-links">
 <li><a href="/">Home</a></li>
 <li><a href="blog.html">Blog</a></li>
+<li><a href="games.html">Games</a></li>
 </ul>
 </nav>
 </header>
@@ -119,5 +120,12 @@ func main() {
 
 	blogContent := fmt.Sprintf(BlogList, blogPageList)
 	writeHTML(blogContent, "blog.html")
+
+	gamesPage := PageData{}
+	gamesPage.ReadXDFileNative("./xdfiles/games.xd")
+
+	t, d, b, f := gamesPage.GenerateHTML()
+	gamesContent := fmt.Sprintf(Main, t, d, b, f)
+	writeHTML(gamesContent, "games.html")
 
 }

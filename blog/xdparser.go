@@ -125,7 +125,6 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 			text += "\n"
 		} else if flag == IMAGE {
 			split := strings.Split(text, "^")
-			fmt.Println("TF : ", split[2])
 			text = split[2]
 			openTag = fmt.Sprintf(openTag, split[0], split[1])
 		}
