@@ -68,7 +68,7 @@ That's how to make a simple personal blog in Go with custom file format. When wr
 I'm sorry if there is something confusing or doesn't make sense. I'm just starting out on writing technical post. If you had any feedbacks, feel free to DM me on my social media or you can email (can be found on the front page). Thank you for reading this and i hope you learn something new. See you :)
 
 [list]
-Project link : <a href="https://github.com/beyondchan28/beyondchan28.github.io/tree/main/blog">Blog and XD Parser</a>
+Project link : <a href="https://github.com/beyondchan28/beyondchan28.github.io">Blog and XD Parser</a>
 
 [footer]
 Tag: Golang, Website, XD Parser

@@ -67,7 +67,4 @@ func main() {
 	t, d, b, f := gamesPage.GenerateHTML()
 	gamesContent := fmt.Sprintf(blog.Main, t, d, b, f)
 	blog.WriteHTML(gamesContent, "./templates/games.html")
-
-	fmt.Println("F")
-
 }
