@@ -5,28 +5,28 @@ Some of Games I've Made
 Giggles And Gold
 
 [image]
-../blog/images/giggles.png^Giggles And Gold^Giggles And Gold
+../static/images/giggles.png^Giggles And Gold^Giggles And Gold
 
 [paragraph]
 Commercial 2D mobile game.
 
 [list]
-<a href="./games/giggles-and-gold">Play</a>
+<a href="../games/giggles-and-gold">Play</a>
 
 [chapter]
 Beyonddd JS Example
 
 [image]
-../blog/images/beyondddjs.png^BeyondddJS Repository^BeyondddJS Repository
+../static/images/beyondddjs.png^BeyondddJS Repository^BeyondddJS Repository
 
 [image]
-../blog/images/beyondddjs_example.png^BeyondddJS Example^BeyondddJS Game Example
+../static/images/beyondddjs_example.png^BeyondddJS Example^BeyondddJS Game Example
 
 [paragraph]
 Game example made with my own small 2D HTML5 game library, BeyondddJS.
 
 [list]
-<a href="./games/beyonddd-js-example">Play</a>
+<a href="../games/beyonddd-js-example">Play</a>
 
 [list]
 <a href="https://github.com/beyondchan28/Beyonddd-JS">Library Link</a>

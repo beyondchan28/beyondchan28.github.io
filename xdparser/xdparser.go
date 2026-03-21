@@ -1,4 +1,4 @@
-package main
+package xdparser
 
 import (
 	"bufio"
@@ -29,10 +29,10 @@ const (
 type PageMap map[Flag][]int //
 
 type PageData struct {
-	pageMapArray []PageMap
-	texts        []string
+	PageMapArray []PageMap
+	Texts        []string
 	keys         []Flag
-	newLineIndex []int // texts index to know add new line
+	newLineIndex []int // Texts index to know add new line
 }
 
 func (pd *PageData) addData(flag string) {
@@ -68,7 +68,7 @@ func (pd *PageData) addData(flag string) {
 
 	newPageMap := PageMap{}
 	pd.keys = append(pd.keys, currentFlag)
-	pd.pageMapArray = append(pd.pageMapArray, newPageMap)
+	pd.PageMapArray = append(pd.PageMapArray, newPageMap)
 }
 
 func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
@@ -120,10 +120,11 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 	var text string
 
 	for _, textIndex := range indexes {
-		text += pd.texts[textIndex]
-		if flag == CODE {
+		text += pd.Texts[textIndex]
+		switch flag {
+		case CODE:
 			text += "\n"
-		} else if flag == IMAGE {
+		case IMAGE:
 			split := strings.Split(text, "^")
 			text = split[2]
 			openTag = fmt.Sprintf(openTag, split[0], split[1])
@@ -145,10 +146,10 @@ func (pd *PageData) readLine(reader io.Reader) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		pd.texts = append(pd.texts, line)
+		pd.Texts = append(pd.Texts, line)
 	}
 
-	for index, text := range pd.texts {
+	for index, text := range pd.Texts {
 		// check for Tag
 		if len(text) != 0 && text[0] == '[' {
 			flag := text[1 : len(text)-1]
@@ -158,14 +159,14 @@ func (pd *PageData) readLine(reader io.Reader) {
 			pd.newLineIndex = append(pd.newLineIndex, index)
 			// appending after tags
 		} else {
-			lastIndex := len(pd.pageMapArray) - 1
+			lastIndex := len(pd.PageMapArray) - 1
 			lastKey := pd.keys[len(pd.keys)-1]
-			pd.pageMapArray[lastIndex][lastKey] = append(pd.pageMapArray[lastIndex][lastKey], index)
+			pd.PageMapArray[lastIndex][lastKey] = append(pd.PageMapArray[lastIndex][lastKey], index)
 		}
 	}
 
-	// fmt.Println("[INFO] Total texts    line : ", len(pd.texts))
-	// fmt.Println("[INFO] Total pageData data : ", len(pd.pageMapArray))
+	// fmt.Println("[INFO] Total Texts    line : ", len(pd.Texts))
+	// fmt.Println("[INFO] Total pageData data : ", len(pd.PageMapArray))
 	// fmt.Println("[INFO] Total newlines      : ", len(pd.newLineIndex))
 	// fmt.Println("[INFO] Index to addnewlines: ", pd.newLineIndex)
 }
@@ -184,7 +185,7 @@ func (pd *PageData) ReadXDFileNative(path string) {
 func (pd *PageData) GenerateHTML() (string, string, string, string) {
 	var title, date, body, footer string
 
-	for _, pageData := range pd.pageMapArray {
+	for _, pageData := range pd.PageMapArray {
 		for key, val := range pageData {
 			switch key {
 			case TITLE:

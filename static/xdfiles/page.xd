@@ -23,7 +23,7 @@ Before we make the system, we had to choose a file format for you to write your 
 But for this blog, we will use my own file format called XD. This file format much more simpler than Markdown and i like to make my own solution rather than using an existing one (I'm highly recommend you to do the same way :)). This file format literally just a way to tag a specific part of the blog's content and later will be injected to predefined HTML tag. Here's are all the tag:
 
 [image]
-../blog/images/xd_file_format.png^XD file tag^Tag of XD File
+../static/images/xd_file_format.png^XD file tag^Tag of XD File
 
 [chapter]
 Parser for The File Format
@@ -32,13 +32,13 @@ Parser for The File Format
 After that, we can create the parser for the file format. For this case its called XD Parser. To do it, first, we have to open and store everyline of text inside the XD file. And then store every tag and every line below it. Here's the code to read the XD file, read every line, check tags, and the store it.
 
 [image]
-../blog/images/parse_xd.png^Parse XD File^Parsing XD file
+../static/images/parse_xd.png^Parse XD File^Parsing XD file
 
 [paragraph]
 As i said before, every tag will be translated to predefined HTML tag. For example tag "TITLE" will be translated to "h1", tag "CHAPTER" to "h2", and so on. Here's the implementation.
 
 [image]
-../blog/images/xd_to_tag.png^XD tag to HTML tag^XD tag to HTML tag
+../static/images/xd_to_tag.png^XD tag to HTML tag^XD tag to HTML tag
 
 [paragraph]
 The result of parsing the XD file is stored as multiline string. Simple.
@@ -50,7 +50,7 @@ The Blog System
 The idea of the blog system is really simple. We just need to make a system that compose the HTML file based on our file format. So, all we need is a way to crate a file and write the file from generated strings that we had from our parser and then save it with .html file extension. Here's the implementation.
 
 [image]
-../blog/images/xd_to_html.png^Parsed data to HTML^Parsed data to HTML
+../static/images/xd_to_html.png^Parsed data to HTML^Parsed data to HTML
 
 [paragraph]
 The function receive the data we got from the parser and the name of its files. And also, The "Head" and "Foot" variables are based on our design in the first step, so the generated HTML files are on the same look and design (like this blog).

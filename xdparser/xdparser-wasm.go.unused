@@ -1,4 +1,4 @@
-package main
+package xdparser
 
 import (
 	"fmt"
@@ -46,11 +46,11 @@ func (pd *PageData) addTag(flag Flag, indexes []int) {
 	var text string
 	if len(indexes) == 1 {
 		textIndex := indexes[0]
-		text = pd.texts[textIndex]
+		text = pd.Texts[textIndex]
 	} else {
 		for _, textIndex := range indexes {
 
-			text += pd.texts[textIndex]
+			text += pd.Texts[textIndex]
 			if flag == CODE {
 				text += "\n"
 			}
@@ -132,7 +132,7 @@ func (pd *PageData) ReadXDFileWASM(path string) {
 }
 
 func (pd *PageData) InsertGeneratedHTML() {
-	for _, pageData := range pd.pageMapArray {
+	for _, pageData := range pd.PageMapArray {
 		for key, val := range pageData {
 			pd.addTag(key, val)
 		}
