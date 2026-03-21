@@ -32,7 +32,7 @@
 </div>
 
 <div class="post-body" id="body">
-<p>There is a lot of ways to create your own blog these days. Most people would most likely do it in some combo of frameworks.But for personal use, you have a complete choice to use any technology you want.In this blog, i will tell you the simplest way to make your personal blog in Go without any dependency or third party library.
+<p>There is a lot of ways to create your own blog these days. Most people would most likely do it in some combo of frameworks. But for personal use, you have a complete choice to use any technology you want. In this blog, i will tell you the simplest way to make your personal blog in Go without any dependency or third party library.
 </p><h2>Design The Page
 </h2><p>First of all, we have to make the design of our web page in HTML and CSS. Because, if we bad at CSS (i'm suck on CSS), we can use LLM to do it for us. Make sure to have specific web page design in mind before prompting. For example, I like to make it simple and comfortable to read, so i design my web page (literally this blog) to be the same as a paper page inside a book. After we finish the design, we can proceed to the next step.
 </p><h2>File Format for The Blog's Content
@@ -50,8 +50,7 @@
 </p><figure class="blog-image">
 		<img src=../blog/images/xd_to_tag.png alt=XD tag to HTML tag>
 		<figcaption>XD tag to HTML tag
-</figcaption></figure><p>The result of parsing the XD file is stored a multiline string. Simple.
-</p><p>If the parser is done, we can proceed to the next step.
+</figcaption></figure><p>The result of parsing the XD file is stored as multiline string. Simple.
 </p><h2>The Blog System
 </h2><p>The idea of the blog system is really simple. We just need to make a system that compose the HTML file based on our file format. So, all we need is a way to crate a file and write the file from generated strings that we had from our parser and then save it with .html file extension. Here's the implementation.
 </p><figure class="blog-image">
