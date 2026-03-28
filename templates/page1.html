@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond The Screen</title>
+<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+<header>
+<nav class="navbar">
+<div class="logo">Beyond The Screen</div>
+<ul class="nav-links">
+<li><a href="../">Home</a></li>
+<li><a href="./blog.html">Blog</a></li>
+<li><a href="./games.html">Games</a></li>
+</ul>
+</nav>
+</header>
+
+<div class="container">
+ <main class="main-content">
+
+<div class="post-header" id="title">
+<h1>Script as Resource for Better Design Pattern</h1>
+<div class="post-meta" id="date">
+<i>Published on Saturday, March 28th 2026
+</i>
+</div>
+</div>
+
+<div class="post-body" id="body">
+<p>Godot have a fundamental building blocks callde Node, but besides Node, there is also Resouce. Node is basically the fundamental for every single game object, Resource is just a data container. Texture, Mesh, and Animation are Resouces, but as stated <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html">here</a>, Script is considered as Resouce. Just like Texture that can be changed or swapped during runtime, it also means that Script can also do that. We can harness this mechanism to build up new design pattern for some problems that often we face during the development. I did this for my recent professional work to bridge game designer, narrative designer, and artist for faster iteration and high adaptability to change.
+</p><p>In this article, i will teach you how to do it.
+</p><h2>Use Case
+</h2><p>Before we jump to the implementation, its easier to undertand and imagine with real use case. The use case is non-linear narrative system. This problem seem trivial, but it can be hard to implement when the design kept changing and usually the need for some specific game logic happening for every single branch are needed. So, designing a good system that can tackle these problems can be great and we will implement it with Script as Resource as the baseline.
+</p><p>To be more precise, here's the flowchart on what we were trying solve:
+</p><figure class="blog-image">
+		<img src=../static/images/customer-cashier_flowchart.png alt=Barista-Customer Flowchart>
+		<figcaption>Barista-Customer Flowchart
+</figcaption></figure><p>This flowchart is a narrative design on a game when a customer buying drinks in a cafe and there is an event happening based on what's the customer choice. As you can see, every choice leads to different event.
+</p><h2>Implementation
+</h2><p>Because every choice have different event, it also means that every event will have its own implementation that independent to other event. So, based on that, every event will be managed on seperate Script called EventScript and then we will also create a Script that will choose the right EventScript based on the choice. This Script called EventManager. To make it happen, first of all, we should make a class for EventScript, so EventManager will call the same function name across all event. Here's how we do that:
+</p><figure class="blog-image">
+		<img src=../static/images/event_script.png alt=EventScript and its its child example>
+		<figcaption>EventScript and its child example
+</figcaption></figure><p>As you can see, for every choice have its own scipt. For every event logic implementation, we can just override '_process_event' function from base class. For all the created event script except base class, should be put on the same folder, so it can be easily loaded later for EventManager to prepare.
+</p><p>After that we can implement our EventManager script. Here's the implementation:
+</p><figure class="blog-image">
+		<img src=../static/images/event_manager.png alt=EventManager implementation>
+		<figcaption>EventManager implementation
+</figcaption></figure><p>Every function working literally as the name its function stated. The only important note is on the line number 2, we need to setup an object to hold the script. This is easier than create and managed different node to hold the script. And also we can't directly call a function from the Script without a Node using it, so this have to be done.
+</p><p>To use the system, we just have to call 'set_and_process_event_script' function and provide the drink choice. The function will get the correct script based on the drink choice from dicionary then set to the holder and call it.
+</p><h2>Conclusion
+</h2><p>With this design pattern, we can easily expand every event without ever to concern that the implementation will affect other event. It's also easier to reason about and managed. This also makes the system adapt to design change and also makes iteration faster.
+</p>
+</div>
+
+<div class="post-footer" id="footer">
+<em>Tag: Godot, Design Patter, Resource</em>
+</div>
+
+</main></div>
+</body>
+<footer>
+© 2026 Beyond The Screen | All Rights Reserved
+</footer>
+</html>
