@@ -4,7 +4,7 @@ Script as Resource for Better Design Pattern
 Published on Saturday, March 28th 2026
 
 [paragraph]
-Godot have a fundamental building blocks callde Node, but besides Node, there is also Resouce. Node is basically the fundamental for every single game object, Resource is just a data container. Texture, Mesh, and Animation are Resouces, but as stated <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html">here</a>, Script is considered as Resouce. Just like Texture that can be changed or swapped during runtime, it also means that Script can also do that. We can harness this mechanism to build up new design pattern for some problems that often we face during the development. I did this for my recent professional work to bridge game designer, narrative designer, and artist for faster iteration and high adaptability to change.
+Godot have a fundamental building blocks callde Node, but besides Node, there is also Resouce. Node is basically the fundamental for every single game object, Resource is just a data container. Texture, Mesh, and Animation are Resouces, but as stated <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html" target="_blank">here</a>, Script is considered as Resouce. Just like Texture that can be changed or swapped during runtime, it also means that Script can also do that. We can harness this mechanism to build up new design pattern for some problems that often we face during the development. I did this for my recent professional work to bridge game designer, narrative designer, and artist for faster iteration and high adaptability to change.
 
 [paragraph]
 In this article, i will teach you how to do it.
