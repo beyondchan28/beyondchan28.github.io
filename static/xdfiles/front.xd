@@ -20,16 +20,17 @@ Mostly experienced as a game programmer/developer.
 Also founding indie game studios here and there. Most of the game are made with Godot Engine <3
 
 [paragraph]
-Currently on the way to be a Golang Developer. Here's my <a href="./static/CV_Chandra Gunawan_SoftwareEngineer-EN.pdf" target="_blank">CV</a>.
+Currently on the way to be a Golang Developer.
 
 [paragraph]
-This blog made with Golang and compiled down to WASM with my own flavour of Markdown file called XD.
 
 [section]
 Here's where you can find me
 
 [list]
 Email     : <a href="mailto:chandragunawan.work@gmail.com">Send mail to me</a>
+[list]
+CV        : <a href="./static/CV_Chandra Gunawan_SoftwareEngineer-EN.pdf" target="_blank">See my CV</a>.
 [list]
 Github    : <a href="https://github.com/beyondchan28" target="_blank">beyondchan28</a>
 [list]
