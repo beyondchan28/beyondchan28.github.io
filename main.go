@@ -28,6 +28,7 @@ func main() {
 	var pages []xdparser.PageData
 	addPage(&pages, "page")
 	addPage(&pages, "page2")
+	addPage(&pages, "page3")
 
 	for idx, pg := range pages {
 		fileName := fmt.Sprintf("./templates/page%d.html", idx)

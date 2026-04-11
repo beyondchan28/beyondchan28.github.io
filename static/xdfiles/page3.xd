@@ -1,0 +1,89 @@
+[title]
+The Embracement of Legacy Technology
+
+[date]
+Published on Saturday, April 11th 2026
+
+[paragraph]
+In todays of software development, there is so much technology we can use to solve our problems as a byproducts of interacting with computers. The software world itself, has so much subfield that have its own specific tools to solve its own specific problems. To make things easier, software usually categorize based on the platform its run on. There is desktop platform, web platform, and mobile platform. If we look at the web platform, there is SO MUCH tools provided by the community (read JavaScript developer). Tools are made to make developer's live easier. But nowadays, most developer do not know the cost of relying too much on tools/framework hell (this should be has its own article).
+
+[paragraph]
+In this article i will not talk about web, but I will explain on why we, as developer, should embrace, learn, and use legacy technology. Most of legacy technology are being used in our day-by-day life so much that we overlook and take it for granted. These are the ultimate definition of good software. So, we will miss so much things if we kept ignoring or avoiding them. If you are felt stuck and want to try learn about legacy technology but failed to find good reason or motive, may you find them in this article.
+
+[chapter]
+The Background
+
+[paragraph]
+Before i talk about the manifesto, i think its neccessary to talk about a brief story that leads me to came to this conclusion.
+
+[paragraph]
+Back then in my college days, i was so invested on learning about implementation details, especially in game programming. Because the game world, almost always use legacy technology, C++ as its main programming language to build game engines, Its natural for me to eventually learn and use them.
+
+[paragraph]
+I remember the very first week of learning to use C++ was so overwhelming. As a learner without a mentor or community to learn with (this is a big mistake for sure), i was stuck for more than 20 hours of work on just trying to setup C++ development project. I did kept jumping on using IDE and without IDE. Most of resources out there, always recommended to use Visual Studio as IDE, but back then, my laptop was only 4 gigs of RAM, so my computing resource budget so limited. So, i had to find altenatives. After that, i encounter build system hell such as CMake and Makefile. I do try to learn them, but its just too much. The worst part is, the syntax and error system are not useful. The overall experiences just so not obvious and awful. I had to going over these disaster to just start to code C++.
+
+[paragraph]
+Long story short, I managed to setup C++ project using CodeBlocks IDE. Finally, i can write some C++ code.
+
+[paragraph]
+The setting up project is worse, but the C++ experience is way more worse. These are the reasons:
+
+[list]
+There are more than one version of compiler to build the C++ code
+
+[list]
+There are some versions of C++ libraries that ONLY works on specific compiler AND specific version.
+
+[list]
+If you use wrong library for wrong compiler, the error message is NOT TELLING you this when you compile
+
+[list]
+Most of these library are so old, that most of useful informations are hidden in the documentation
+
+[list]
+Useless error message :)
+
+[list]
+Complicated and too detailed API reference :))
+
+[list]
+There is a lot of style to write C++ code, so its like different language sometimes :)))
+
+[paragraph]
+You surely can imagine how much you have to go through if you had to learn all of this on your own.
+
+[paragraph]
+By reading this story, its like I'm trying to traumatize and scare you away to learn legacy technology. But trust me, you don't have to go through all of this after reading this article. My intention of sharing this story is to tell the wrong way to learn legacy technology. This story also will be your reference of worst case scenario, so at least, you have the knowledge to build up your mentality when working with legacy technology. Moreover, there are tools available for you to use that can be use to not suck up your time on working the real work.
+
+[paragraph]
+Now you had a good idea on how software development with legacy technology is. We are now ready go to the manifesto.
+
+[chapter]
+The Manifesto
+
+[paragraph]
+Legacy tools are the main infrastructure that shaped our entire computing world today. So, if you're not know how to use these tools, then you are the one who missing out. Maybe there are some good alternatives to these legacy code such as C/C++ like Odin, Zig, or Jai. But, these modern, alternatives tools are also have to provide a way to interfacing C/C++ code, because how useful many useful code written in that legacy tools. You will miss out so much if you're not giving it a try and put these under your tool belt.
+
+[paragraph]
+As you might already now, i got a very painful experiences using these tools. But, because of that, the entire universe of computing and fascinating implementation details about everything i use as a software engineer opened up and i can feel that those things already in my sight. I truly become novice to moderate easily. Every language turns out to be just tools and i can just use whatever i want to. It is that good.
+
+[paragraph]
+I can guarantee you, it's all worth it.
+
+[chapter]
+Final Words
+
+[paragraph]
+This article is may be not the very infromative one (this is considerably a yap XD), but i hope every software developer now about this and at least, i can little bit helpeing people to reach bar of high quality software and improve our understandings of the tools we used.
+
+[paragraph]
+I will end this article with a quote from underrated japanese film called "Fyling Colors" that have been stuck within me for years. The quote is very basic and cliche but really inspire me to become better and kept going (you should watch the whole film to get it i guess :D).
+
+[image]
+../static/images/quotes.jpg^Quote from Flying Colors^Quote from Flying Colors
+
+[paragraph]
+Thank you for reading and see you in the next article :)
+
+[footer]
+Tag: Manifesto, Legacy tools, YippiYippiYappaYappa
