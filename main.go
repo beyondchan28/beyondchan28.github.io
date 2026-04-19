@@ -29,6 +29,7 @@ func main() {
 	addPage(&pages, "page")
 	addPage(&pages, "page2")
 	addPage(&pages, "page3")
+	addPage(&pages, "page4")
 
 	for idx, pg := range pages {
 		fileName := fmt.Sprintf("./templates/page%d.html", idx)
