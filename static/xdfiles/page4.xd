@@ -1,7 +1,7 @@
 [title]
 Sane C/C++ Build System
 [date]
-Published on Sunday, April 4th 2026
+Published on Sunday, April 19th 2026
 
 [paragraph]
 C/C++ development setup is not a trivial problem, especially for beginners. Most beginner tutorial on the subject, almost always advised to use Integrated Development Envionment (IDE) such as Visual Studio or Code::Blocks. It is advised this way, because this is the most obvious and fastest way to start writing code. But, there is a chance that, people who is beginner and wanted to setup project without using IDE. Just like me.
