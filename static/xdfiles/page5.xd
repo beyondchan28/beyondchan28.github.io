@@ -1,0 +1,74 @@
+[title]
+Programming Language of Choice Is Irrelevant
+
+[date]
+Published on Monday, May 11th 2026
+
+[paragraph]
+There is a lot of programming languages that been use to make software and every language has its own tooling, such as compiler, build system, framework, standard library, and much more. All of the tooling are mostly an obligatory part of the language. Because of this, it is impossible for us to learn all of it in our live time.
+
+[paragraph]
+But, we as a human have the capacity to recognize pattern and rules. So, to tackle this impossibilty to use every single technology a little trivial. Every single programming languages lies wihtin five aspects, namely syntax, semantics, data types, and control structures. If you have been engage with programming for some decent amount of times, you might already come across to these key aspects. But, you also not really knew what are these really means.
+
+[paragraph]
+In this article, I will explain these aspects will help you to tackel the problem of using many different technology even though you are never using them before.
+
+[chapter]
+The Big Picture of Programming Language
+
+[paragraph]
+If you had enough of programming for atleast 10k lines of code in any language, you might notice that, almost everytime you think on making feature, its always start on how to layout your data. As in OOP, if we want to create a Car, we define its attributes such as amount of tires, fuel type, brand, and so on by declaring them as the member/property of class Car. After that, we create the functionality of the Car, such as Engine, Honking sound, and so on as the methods/functions of inside the Car class.
+
+[paragraph]
+Maybe you think, i already know all of this, and what this has to do with anything?
+
+[paragraph]
+This simple way of breaking down concept is applicable on any programming language. Even though the language itself doesn't support OOP.
+
+[paragraph]
+For example, in C, which didn't comes with OOP, we still can do make the Car class example happen. The attributes and functionality is not wrapped/grouped in one place.
+
+[paragraph]
+By this example, you can see that in general, programming language is just a way for us to dictate how the data should be organized. It is as simple as that.
+
+[chapter]
+The 4 Aspects of Programming Languages
+
+[paragraph]
+Every single programming have these aspects:
+
+[list]
+Syntax : How the language is typed.
+
+[list]
+Semantics : What the text you typed means.
+
+[list]
+Data types : How data represented and treated (class, struct, array, list, map).
+
+[list]
+Control structures : Logical statements (if/else) and repeating tasks (for/while).
+
+[paragraph]
+There are many more aspects if you googling yourself but fundamentally, everything lise within these three aspects.
+
+[paragraph]
+Every language have its way to be written (syntax). Even though you its typed differently, the meaning behind it all are the same. Declaring variable, groupping variable, implementations inside a functions, and so on. Every program also need some conditions to control how the data should be done by using control structures.
+
+[paragraph]
+Therefore, it is safe to say that programming language are just a tool to express our mind and logical thinking as a computer program.
+
+[chapter]
+Conclusion
+
+[paragraph]
+At some point of being a Software Engineer, programming language or whatever framework/engines/technology we use to make software become irrelevant on potraying what our capable of making. As a purpose of any language, it is just a way for us to express our logical and knowledge as a computer program.
+
+[paragraph]
+As Tsoding, the Messiah of Recreational Programming pinned a message in his X (twitter) account:
+
+[image]
+../static/images/tsoding.png^Tsoding Pinned Tweet^Tsoding Pinned Tweet
+
+[footer]
+Tag: Programming Wisdom, YippiYippiYappaYappa
