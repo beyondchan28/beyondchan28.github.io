@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond The Screen</title>
+<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+<header>
+<nav class="navbar">
+<div class="logo">Beyond The Screen</div>
+<ul class="nav-links">
+<li><a href="../">Home</a></li>
+<li><a href="./blog.html">Blog</a></li>
+<li><a href="./games.html">Games</a></li>
+</ul>
+</nav>
+</header>
+
+<div class="container">
+ <main class="main-content">
+
+<div class="post-header" id="title">
+<h1>Unity vs Godot (No Hot Take)
+</h1>
+<div class="post-meta" id="date">
+<i>Published on Saturday, August 1st 2026
+</i>
+</div>
+</div>
+
+<div class="post-body" id="body">
+<p>I have been using Unity for 3 months for work, 8 hours a day per week and also an avid Godot Engine user (6+ years), so, in this article, i will review both on engine as honest as possible and as little bias as possible.
+</p><p>Before we jump into it, to keep the review topic not too broad, i will limit the dicussion only about user/dev experience on making UI, shader code, 2D game, and 3D game inside the engine. With that being said, let's start!
+</p><h2>Godot Review
+</h2><p>Making UI in Godot is great. Most 2D artist can easily pick up Godot and built amazing stuff with it. It's really tell that, the engine design is coupled with ease of use for artists in mind. You want to make a scroll-able panel? There is Node for it. You want to animate UIs? Tween ready to tackle it. Godot provide rich set of tools to create beautiful and interactive UIs. I can confidently say that, this is the top selling point of the engine.
+</p><p>On the other hand, making shader Godot is pretty tough. It's code heavy and currently, almost no resources to create custom shaders. Godot's visual editor for making shaders is not mature enough and the worst part is it's not intuitive. For beginner who does not know a single line of shader code, it is impossible to their own shader.
+</p><p>Developing 2D game with Godot is nice. Every single Node2D are really great building blocks, except physics related node such as PinJoint2D, RigidBody2D, etc. It's not that intuitive like the other 2D Node. In my experience, i got to tweaks a lot for a non-trivial thing. The problem is that, the default tuning is not great. Maybe because the engine still want to prioritize lower-end devices. Moreover, the default physics engine is also not the best. Sometimes it is not as deterministic as other physics engine i ever tried. Sometimes weird behavior can occur such as the physics engine randomly miss a collision check for no reason.
+</p><p>Developing 3D game in the other hand, is not seamless. For beginner and mid experienced developer, it is quite hard to make beautiful 3D game. Lack of free online resources and the official documentation is not practical enough to do so. But, i think for small to mid size games, is still the best in my opinion.
+</p><p>Developing experience is also great. The compile time is impressively fast, so iteration feels natural and frictionless.This part is what most devs not appreciate enough. Moreover, using GDScript is so easy. It's nice to not typing "public" or "private" like other OOP-style language. Built-in documentation also the best. I dont have to googling every single time if i want to know an API usage or description. I just have to press F1 and i can search for what i need.
+</p><p>Overall, Godot is the go-to for indies. You can build and iterate really fast using it. You don't need to have a powerful device to start using it too.
+</p><p>My rating for Godot, accordingly, are:</p><li>UI : 10 / 10
+</li><li>Shader : 5 / 10
+</li><li>2D : 8.5 / 10
+</li><li>3D : 7 / 10
+</li><li>Dev experience : 9 / 10
+</li><h2>Unity Review
+</h2><p>First of all, Unity iteration time is so bad. It took 15-30 seconds to run the game every single time script changes. It's awful. it took a lot of time to be okay with it. The default settings for compilation also bad. Auto-recompile everytime the editor gain focus. If it get disabled, its either pressing CTRL+R to refresh Assets folder and recompile scripts or making a custom editor script to recompile it everytime clicking the play button. Why this is not the default? why it took a couple steps to do it? If the default is auto-recompile, atleast, there is an automatic settings to only compile when pressing the play button without writing editor script. This is so bad.
+</p><p>The C# in the other hand, took too much grudge work to make non-trivial things. public, private, serializefield killing the experience. This keyword may a good thing if there are more a lot of people touching the codebase, but it is unnecessary for one person. This language is absolutely not suitable for gameplay code and more suitable for the backend/engine side of code, because in my experience less friction on typing gameplay code means more output and creative solution can be test out.
+</p><p>For developing 2D games though, it is not that good compared to its 3D. The 2D side felt like a hack on top of 3D stuff. That's why it felt awkward when interacting with 2D components. But everything else are seamless. It's physics is deterministic, has good defaults, and intuitive.
+</p><p>Unity's 3D also great. The physics is seamless and intuitive. The engine is no doubt great for making realistic 3D games. It's shaders and rendering pipeline are also insanely advance and easy to use, even for beginner. Furthermore, free resources by its community are already everywhere, so the clueless beginner can easily tackle their problems. And one important thing is the default settings for making beautiful 3D games are great. It took almost no tweaks.
+</p><p>More on shader, the visual editor is intuitive and capable to create complex shader without typing a single line of shader code. Shader in Unity is the top selling point.
+</p><p>My rating for Unity, accordingly, are:
+</p><li>UI : 6 / 10
+</li><li>Shader : 8 / 10
+</li><li>2D : 6 / 10
+</li><li>3D : 9 / 10
+</li><li>Dev experience : 4 / 10
+</li><h2>Conclusion
+</h2><p>I like Unity ease of use on making appealing 3D games, but as a programmer who type a lot of things instead of interacting with the editor, it is not a good experience if compared to Godot. And also, I'm the only one touching the codebase in all of the games i ever created, so my review is coupled closely to that fact.
+</p><p>All i can say after using both engine for hobby and professional work, i still think Godot is the best choice for indies with small team.
+</p>
+</div>
+
+<div class="post-footer" id="footer">
+<em>Tag: Review, Godot, Unity</em>
+</div>
+
+</main></div>
+</body>
+<footer>
+© 2026 Beyond The Screen | All Rights Reserved
+</footer>
+</html>
