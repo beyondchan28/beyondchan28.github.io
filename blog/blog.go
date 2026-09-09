@@ -4,12 +4,16 @@ import (
 	"os"
 )
 
-const HeadIndex string = `<!DOCTYPE html>
+const Header string = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beyond The Screen</title>
+`
+
+const HeadIndex string = `
+<link rel="icon" type="image/x-icon" href="./static/icon.ico">
 <link rel="stylesheet" href="./static/style.css">
 </head>
 
@@ -28,12 +32,8 @@ const HeadIndex string = `<!DOCTYPE html>
 <div class="container">
 `
 
-const HeadTemplate string = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beyond The Screen</title>
+const HeadTemplate string = `
+<link rel="icon" type="image/x-icon" href="../static/icon.ico">
 <link rel="stylesheet" href="../static/style.css">
 </head>
 
