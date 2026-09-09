@@ -19,7 +19,7 @@ Before we jump to the implementation, its easier to undertand and imagine with r
 To be more precise, here's the flowchart on what we were trying solve:
 
 [image]
-../static/images/customer-cashier_flowchart.png^Barista-Customer Flowchart^Barista-Customer Flowchart
+../static/images/2/customer-cashier_flowchart.png^Barista-Customer Flowchart^Barista-Customer Flowchart
 
 [paragraph]
 This flowchart is a narrative design on a game when a customer buying drinks in a cafe and there is an event happening based on what's the customer choice. As you can see, every choice leads to different event.
@@ -31,7 +31,7 @@ Implementation
 Because every choice have different event, it also means that every event will have its own implementation that independent to other event. So, based on that, every event will be managed on seperate Script called EventScript and then we will also create a Script that will choose the right EventScript based on the choice. This Script called EventManager. To make it happen, first of all, we should make a class for EventScript, so EventManager will call the same function name across all event. Here's how we do that:
 
 [image]
-../static/images/event_script.png^EventScript and its its child example^EventScript and its child example
+../static/images/2/event_script.png^EventScript and its its child example^EventScript and its child example
 
 [paragraph]
 As you can see, for every choice have its own scipt. For every event logic implementation, we can just override '_process_event' function from base class. For all the created event script except base class, should be put on the same folder, so it can be easily loaded later for EventManager to prepare.
@@ -40,7 +40,7 @@ As you can see, for every choice have its own scipt. For every event logic imple
 After that we can implement our EventManager script. Here's the implementation:
 
 [image]
-../static/images/event_manager.png^EventManager implementation^EventManager implementation
+../static/images/2/event_manager.png^EventManager implementation^EventManager implementation
 
 [paragraph]
 Every function working literally as the name its function stated. The only important note is on the line number 2, we need to setup an object to hold the script. This is easier than create and managed different node to hold the script. And also we can't directly call a function from the Script without a Node using it, so this have to be done.

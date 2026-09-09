@@ -37,18 +37,18 @@
 </h2><p>Before we jump to the implementation, its easier to undertand and imagine with real use case. The use case is non-linear narrative system. This problem seem trivial, but it can be hard to implement when the design kept changing and usually the need for some specific game logic happening for every single branch are needed. So, designing a good system that can tackle these problems can be great and we will implement it with Script as Resource as the baseline.
 </p><p>To be more precise, here's the flowchart on what we were trying solve:
 </p><figure class="blog-image">
-		<img src=../static/images/customer-cashier_flowchart.png alt=Barista-Customer Flowchart>
+		<img src=../static/images/2/customer-cashier_flowchart.png alt=Barista-Customer Flowchart>
 		<figcaption>Barista-Customer Flowchart
 </figcaption></figure><p>This flowchart is a narrative design on a game when a customer buying drinks in a cafe and there is an event happening based on what's the customer choice. As you can see, every choice leads to different event.
 </p><h2>Implementation
 </h2><p>Because every choice have different event, it also means that every event will have its own implementation that independent to other event. So, based on that, every event will be managed on seperate Script called EventScript and then we will also create a Script that will choose the right EventScript based on the choice. This Script called EventManager. To make it happen, first of all, we should make a class for EventScript, so EventManager will call the same function name across all event. Here's how we do that:
 </p><figure class="blog-image">
-		<img src=../static/images/event_script.png alt=EventScript and its its child example>
+		<img src=../static/images/2/event_script.png alt=EventScript and its its child example>
 		<figcaption>EventScript and its child example
 </figcaption></figure><p>As you can see, for every choice have its own scipt. For every event logic implementation, we can just override '_process_event' function from base class. For all the created event script except base class, should be put on the same folder, so it can be easily loaded later for EventManager to prepare.
 </p><p>After that we can implement our EventManager script. Here's the implementation:
 </p><figure class="blog-image">
-		<img src=../static/images/event_manager.png alt=EventManager implementation>
+		<img src=../static/images/2/event_manager.png alt=EventManager implementation>
 		<figcaption>EventManager implementation
 </figcaption></figure><p>Every function working literally as the name its function stated. The only important note is on the line number 2, we need to setup an object to hold the script. This is easier than create and managed different node to hold the script. And also we can't directly call a function from the Script without a Node using it, so this have to be done.
 </p><p>To use the system, we just have to call 'set_and_process_event_script' function and provide the drink choice. The function will get the correct script based on the drink choice from dicionary then set to the holder and call it.

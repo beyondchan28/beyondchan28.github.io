@@ -5,7 +5,7 @@ Some of Games I've Made
 Giggles And Gold
 
 [image]
-../static/images/giggles.png^Giggles And Gold^Giggles And Gold
+../static/images/games/giggles.png^Giggles And Gold^Giggles And Gold
 
 [paragraph]
 Commercial 2D mobile game.
@@ -17,10 +17,10 @@ Commercial 2D mobile game.
 Beyonddd JS Example
 
 [image]
-../static/images/beyondddjs.png^BeyondddJS Repository^BeyondddJS Repository
+../static/images/games/beyondddjs.png^BeyondddJS Repository^BeyondddJS Repository
 
 [image]
-../static/images/beyondddjs_example.png^BeyondddJS Example^BeyondddJS Game Example
+../static/images/games/beyondddjs_example.png^BeyondddJS Example^BeyondddJS Game Example
 
 [paragraph]
 Game example made with my own small 2D HTML5 game library, BeyondddJS.
