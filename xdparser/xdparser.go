@@ -24,6 +24,7 @@ const (
 	LIST
 	FOOTER
 	IMAGE
+	GIF
 )
 
 type PageMap map[Flag][]int //
@@ -62,6 +63,8 @@ func (pd *PageData) addData(flag string) {
 		currentFlag = FOOTER
 	case "image":
 		currentFlag = IMAGE
+	case "gif":
+		currentFlag = GIF
 	default:
 		panic("[ERROR] Flag is not valid: " + flag)
 	}
@@ -103,12 +106,21 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 		openTag = "<li>"
 		closeTag = "</li>"
 	case CODE:
-		openTag = "<pre><code>"
-		closeTag = "</code></pre>"
+		openTag = `<div class="text-container">
+		<button class="copy-button" onclick="copyText(this)">Copy</button>
+		<div class="code">
+		<div class="line-numbers"></div>
+		<pre class="code-content">`
+		closeTag = "</pre></div></div>"
 	case FOOTER:
 		openTag = "<em>"
 		closeTag = "</em>"
 	case IMAGE:
+		openTag = `<figure class="blog-image">
+		<img src=%s alt=%s>
+		<figcaption>`
+		closeTag = "</figcaption></figure>"
+	case GIF:
 		openTag = `<figure class="blog-image">
 		<img src=%s alt=%s>
 		<figcaption>`
@@ -119,12 +131,20 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 
 	var text string
 
-	for _, textIndex := range indexes {
+	for idx, textIndex := range indexes {
 		text += pd.Texts[textIndex]
+
+		//NOTE: special case for some tags
 		switch flag {
 		case CODE:
-			text += "\n"
+			if idx != len(indexes) - 1 {
+				text += "\n"
+			}
 		case IMAGE:
+			split := strings.Split(text, "^")
+			text = split[2]
+			openTag = fmt.Sprintf(openTag, split[0], split[1])
+		case GIF:
 			split := strings.Split(text, "^")
 			text = split[2]
 			openTag = fmt.Sprintf(openTag, split[0], split[1])

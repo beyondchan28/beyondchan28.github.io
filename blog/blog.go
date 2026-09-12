@@ -57,6 +57,7 @@ const Foot string = `</div>
 <footer>
 © 2026 Beyond The Screen | All Rights Reserved
 </footer>
+<script src="./static/script.js"></script>
 </html>`
 
 const Main string = ` <main class="main-content">
