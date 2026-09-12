@@ -25,6 +25,45 @@ But for this blog, we will use my own file format called XD. This file format mu
 [image]
 ../static/images/1/xd_file_format.png^XD file tag^Tag of XD File
 
+[code]
+%[title]
+blog's title
+
+%[date]
+blog's published date
+
+%[chapter]
+Chapter title
+
+%[section]
+Section title
+
+%[image]
+image_path^image_alternate^Image's caption
+
+%[paragraph]
+for a new paragraph.
+
+%[blockquote]
+this is blockquote
+
+%[taskfalse]
+unchecked list
+
+%[tasktrue]
+checked list
+
+%[list]
+list item
+
+%[code]
+block of code
+
+%[footer]
+for footer
+
+
+
 [chapter]
 Parser for The File Format
 
@@ -33,12 +72,75 @@ After that, we can create the parser for the file format. For this case its call
 
 [image]
 ../static/images/1/parse_xd.png^Parse XD File^Parsing XD file
+[code]
+for index, text := range pd.texts {
+	// check for Tag
+	if len(text) != 0 && text[0] == '[' {
+		flag := text[1 : len(text)-1]
+		pd.addData(flag) // store the flag
+		//check for new line
+	} else if len(text) == 0 {
+		pd.newLineIndex = append(pd.newLineIndex, index)
+		// appending after tags
+	} else {
+		lastIndex := len(pd.pageMapArray) - 1
+		lastKey := pd.keys[len(pd.keys)-1]
+		pd.pageMapArray[lastIndex][lastKey] =
+			append(pd.pageMapArray[lastIndex][lastKey], index)
+	}
+}
 
 [paragraph]
 As i said before, every tag will be translated to predefined HTML tag. For example tag "TITLE" will be translated to "h1", tag "CHAPTER" to "h2", and so on. Here's the implementation.
 
 [image]
 ../static/images/1/xd_to_tag.png^XD tag to HTML tag^XD tag to HTML tag
+
+[code]
+var openTag string
+var closeTag string
+switch flag {
+case TITLE:
+	openTag = "<h1>"
+	closeTag = "</h1>"
+case DATE:
+	openTag = "<i>"
+	closeTag = "</i>"
+case CHAPTER:
+	openTag = "<h2>"
+	closeTag = "</h2>"
+case SECTION:
+	openTag = "<h3>"
+	closeTag = "</h3>"
+case PARAGRAPH:
+	openTag = "<p>"
+	closeTag = "</p>"
+case BLOCKQUOTE:
+	openTag = "<blockquote>"
+	closeTag = "</blockquote>"
+case TASKTRUE:
+	openTag = "<li><input disabled=\"\" type=\"checkbox\">"
+	closeTag = "</li>"
+case TASKFALSE:
+	openTag = "<li><input checked disabled=\"\" type=\"checkbox\">"
+	closeTag = "</li>"
+case LIST:
+	openTag = "<li>"
+	closeTag = "</li>"
+case CODE:
+	openTag = "<pre><code>"
+	closeTag = "</code></pre>"
+case FOOTER:
+	openTag = "<em>"
+	closeTag = "</em>"
+case IMAGE:
+	openTag = `<figure class="blog-image">
+<img src=%s alt=%s>
+<figcaption>`
+	closeTag = "</figcaption></figure>"
+default:
+	panic("[ERROR] Flag is not valid")
+}
 
 [paragraph]
 The result of parsing the XD file is stored as multiline string. Simple.

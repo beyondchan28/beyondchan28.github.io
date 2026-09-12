@@ -16,13 +16,13 @@ func addPage(pg *[]xdparser.PageData, filename string) {
 
 func main() {
 	// NOTE: Generate index HTML
-	front := xdparser.PageData{}
-	front.ReadXDFileNative("./static/xdfiles/front.xd")
+	index := xdparser.PageData{}
+	index.ReadXDFileNative("./static/xdfiles/index.xd")
 
-	title, date, body, footer := front.GenerateHTML()
-	frontContent := fmt.Sprintf(blog.Main, title, date, body, footer)
+	title, date, body, footer := index.GenerateHTML()
+	indexContent := fmt.Sprintf(blog.Main, title, date, body, footer)
 
-	blog.WriteHTML(frontContent, "./index.html")
+	blog.WriteHTML(indexContent, "./index.html")
 
 	//NOTE: Prepare Blog page
 	var pages []xdparser.PageData

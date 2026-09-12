@@ -46,5 +46,14 @@ Instagram : <a href="https://www.instagram.com/thegravital" target="_blank">theg
 [paragraph]
 My one and only motto is "To Infinity and Beyonddd!"
 
+[code]
+function hello(name) {
+    console.log("Hello " + name);
+}
+
+hello("World");
+[gif]
+../static/test.gif^Beyonddd Logo^Beyonddd Logo
+
 [footer]
 Nice to meet you!

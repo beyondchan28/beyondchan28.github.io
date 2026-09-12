@@ -36,6 +36,10 @@ type PageData struct {
 	newLineIndex []int // Texts index to know add new line
 }
 
+const tagPrefix string = "["
+const escapePrefix string = "%"
+const splitChar string = "^"
+
 func (pd *PageData) addData(flag string) {
 	var currentFlag Flag
 	switch flag {
@@ -132,6 +136,16 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 	var text string
 
 	for idx, textIndex := range indexes {
+		//NOTE: special case before appending to text
+		switch flag {
+			case CODE:
+				if strings.HasPrefix(pd.Texts[textIndex], escapePrefix) {
+					pd.Texts[textIndex] = pd.Texts[textIndex][1:]
+				}
+		}
+		if slices.Contains(pd.newLineIndex, textIndex+1) {
+			text += "\n"
+		}
 		text += pd.Texts[textIndex]
 
 		//NOTE: special case for some tags
@@ -141,11 +155,11 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 				text += "\n"
 			}
 		case IMAGE:
-			split := strings.Split(text, "^")
+			split := strings.Split(text, splitChar)
 			text = split[2]
 			openTag = fmt.Sprintf(openTag, split[0], split[1])
 		case GIF:
-			split := strings.Split(text, "^")
+			split := strings.Split(text, splitChar)
 			text = split[2]
 			openTag = fmt.Sprintf(openTag, split[0], split[1])
 		}
@@ -171,7 +185,7 @@ func (pd *PageData) readLine(reader io.Reader) {
 
 	for index, text := range pd.Texts {
 		// check for Tag
-		if len(text) != 0 && text[0] == '[' {
+		if len(text) != 0 && strings.HasPrefix(text, tagPrefix) {
 			flag := text[1 : len(text)-1]
 			pd.addData(flag) // store the flag
 			//check for new line
