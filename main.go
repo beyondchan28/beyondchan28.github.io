@@ -32,9 +32,11 @@ func main() {
 	addPage(&pages, "page4")
 	addPage(&pages, "page5")
 	addPage(&pages, "page6")
+	addPage(&pages, "page7")
 
 	for idx, pg := range pages {
 		fileName := fmt.Sprintf("./templates/page%d.html", idx)
+		fmt.Println(fileName)
 		title, date, body, footer := pg.GenerateHTML()
 		content := fmt.Sprintf(blog.Main, title, date, body, footer)
 		blog.WriteHTML(content, fileName)

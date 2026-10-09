@@ -1,8 +1,8 @@
 [title]
-Yet Another Simple Translation Unity Plugin
+BeyondddTranslation, Easy Game Translation for Unity
 
 [date]
-Saturday, September 19, 2026
+Published on Friday, October 9, 2026
 
 [chapter]
 Why This Exist
@@ -32,7 +32,7 @@ Setup Your Translations
 First of all, set every text components such as TextMeshProUGUI component to unique _key_ like the image below.
 
 [image]
-set key in every text components (top, middle, bot)
+../static/images/7/setup-keys.png^Setup Keys on Components^Setup Keys on Components
 
 [paragraph]
 Maybe you already notice, at top of the image, it has prefix. The underscore ( _ ) symbol is for text Components that are only live inside a scene (such as button names on Main Menu scenes) and the tilde ( ~ ) symbol (at middle of the image) is for text components that are persists across scene like Settings Menu that implemented or other texts that behaves like Singleton.
@@ -44,7 +44,7 @@ Both of these are inside a file that called "Unchained Text" (for easy to rememb
 At the bottom of the image is called "Chained Text" (because one key handling more than one sentence). The _key_ column, will be use as enum later, which means that this suitable for gameplay related texts, such as dialogues and inventory descriptions.
 
 [image]
-tool import key as text file in editor menubar
+../static/images/7/gather-keys.png^Gather Keys on Opened Scene^Gather Keys on Opened Scene
 
 [paragraph]
 After that, at the editor's menu bar, click "Simple Translation/Gather UI Text Game Object Name as Key". This will generate all the keys inside a text file, so you can easily copy paste that into the spreadsheet to setup the translations.
@@ -53,16 +53,16 @@ After that, at the editor's menu bar, click "Simple Translation/Gather UI Text G
 Then, you need to setup all the words that need to be translated. The most common way is using spreadsheet. I recommend using Google Sheet because it is hosted online and can be easily shared among coworkers.
 
 [image]
-spreadsheet
+../static/images/7/spreadsheet.png^Setup Translation Spreadsheet^Setup Translation Spreadsheet
 
 [paragraph]
 As you can see above, you need there is three columns. The most important one is the _key_ column. It's the way to determine each translation, so make sure it is unique. Other columns are the languages. It is needed to generate _Language enum_, so it is recommended for you to provide the correct language names, especially if you want to detect player's system language and adjust it accordingly.
 
 [paragraph]
-After the spreadsheet ready, import "Unchained Text" and "Chained Text" as separate TSV file, then put it into your project.
+After the spreadsheet ready, just copy and paste "Unchained Text" and "Chained Text" to its file respectively. These files are on Assets/BeyondddTranslation/Resources. This is necessary because the path are currently hardcoded and used to generate enums (if you want to change it, just go to BeyondddHelper.cs file and changed it accordingly).
 
 [image]
-generate enums
+../static/images/7/generate-enums.png^Generate Enums and Its Results^Generate Enums and Its Results
 
 [paragraph]
 Press "CTRL + R" to refresh the assets file if you don't see your project, but if you see the TSV files, then hit the "Simple Translation/Generate Enum". This will overwrite _Language enum_ and _ChainedTextKey enum_ inside TranslationEnums.cs file.
@@ -74,7 +74,7 @@ Usage
 The usege is simple, attach SimpleTranslation script to a singleton gameobject (a gameobject that have script calling DontDestroyOnLoad attach to it). But, if you want to the script to behave as singleton, you just have to enable isDestroyOnLoad property in the inspector. Also, you can enable setLanguageBasedOnDevice to setup the language first based on
 
 [image]
-setup TSV file and enabled setLanguageBasedOnDevice and isDestroyOnLoad
+../static/images/7/setup-beyonddd-translation-component.png^Setup BeyondddTranslation Component^Setup BeyondddTranslation Component
 
 [paragraph]
 Then, attach those TSV files in the inspector.
@@ -83,16 +83,16 @@ Then, attach those TSV files in the inspector.
 Before run the game, generate _Language enum_ and _ChainedTextKey enum_ by click "Simple Translation/Generate Enum" in Editor's Menu Bar.
 
 [image]
-result
-
-[paragraph]
-After that, if you run the game, you will notice that the _key_ for Unchained Text that you have setup has changed to its according words. The system also handling it automatically every time scene changed.
-
-[image]
-example of chained text usage
+../static/images/7/setup-chained-text-component.png^Setup ChainedText Component^Setup ChainedText Component
 
 [paragraph]
 For Chained Text, it should be handled manually. Call GetChainedTextList method to get all the texts. If you want the language changed, just simply call this method again to get the list of current language.
+
+[image]
+../static/images/7/result.png^In-game Result^In-game Result
+
+[paragraph]
+After that, if you run the game, you will notice that the all _key_ for Unchained Text and Chained Text that you have setup has changed to its according words. The system also handling it automatically every time scene changed.
 
 [paragraph]
 And that's all. Eazy peazy.
@@ -115,7 +115,7 @@ nohup /home/<USER>/Unity/Hub/Editor/<EDITOR VERSION>/Editor/Unity -projectPath "
 "C:\Program Files\Unity\Hub\Editor\<EDITOR VERSION>\Unity.exe" -projectPath "path\to\your\project\folder"
 
 [paragraph]
-Just write this once (bottom line in .bat file for Windows and top line in .sh file for Linux) and run it by double click or inside a terminal. That's it ! A good chunk memory saved !
+Just write this once (top line in .sh file for Linux and bottom line in .bat file for Windows) and run it by double click or inside a terminal. That's it ! A good chunk memory saved !
 
 [paragraph]
 You're welcome :D
@@ -123,5 +123,131 @@ You're welcome :D
 [paragraph]
 References:
 
-[List]
-Open Source Chinese, Japanese, and Korean Fonts https://github.com/adobe-fonts/source-han-serif/tree/release/
+[list]
+Open Source Chinese, Japanese, and Korean Fonts : https://github.com/adobe-fonts/source-han-serif/tree/release/
+
+[chapter]
+API References
+
+[section]
+Global Enums
+
+[list]
+Language
+[list]
+ChainedTextKey
+
+[section]
+Class BeyondddTranslation
+
+[section]
+Alias
+
+[list]
+ChainedTextData = Dictionary&ltChainedTextKey, Dictionary&ltLanguage, List&ltstring>>>
+
+[section]
+Public Attributes
+
+[list]
+static BeyondddTranslation Instance
+[list]
+static string CeasedPrefix = "_"
+[list]
+static string PersistedPrefix = "~"
+[list]
+SerializeField TextAsset  _unchainedTextFileTSV
+[list]
+SerializeField TextAsset  _chainedTranslationFileTSV
+[list]
+SerializeField bool _setLanguageBasedOnDevice = false
+[list]
+SerializeField bool _isDestroyOnLoad= false
+
+[section]
+Public Functions
+
+[list]
+void UpdateCeasedTranslations()
+[list]
+void UpdatePersistedTranslations()
+[list]
+void RegisterChainedTextObject(ChainedText obj, bool isCeased)
+[list]
+string GetUnchainedTextTranslation(string key)
+[list]
+List<string> GetChainedTextList(ChainedTextKey key)
+[list]
+void SetLanguage(Language lang)
+[list]
+Language GetCurrentLanguage()
+[list]
+ChainedTextData GetChainedTextData()
+[list]
+Component GetCeasedTextComponent(string key)
+[list]
+Component GetPersistedTextComponent(string key)
+[list]
+Component GetCeasedDropdownComponent(string key)
+[list]
+Component GetPersistedDropdownComponent(string key)
+
+[section]
+Class ChainedText
+
+[section]
+Public Functions
+
+[list]
+void SetTextIndex(int val)
+[list]
+int GetTextIndex()
+
+[section]
+Protected Attributes
+
+[list]
+SerializeField protected Component _textComponent
+[list]
+SerializeField protected ChainedTextKey _key
+[list]
+SerializeField protected bool _isCeased = true
+[list]
+protected List&ltstring> _textList
+[list]
+protected int _textIndex = 0
+[list]
+protected bool _isTextFinish = false
+
+[section]
+Protected Functions
+
+[list]
+void SetText()
+
+[section]
+Virtual Functions
+
+[list]
+void SetupOnStart()
+[list]
+void NextText()
+[list]
+void OnLanguageChanged()
+
+[chapter]
+Core Files
+
+[list]
+BeyondddTranslation.cs
+[list]
+ChainedText.cs
+[list]
+BeyondddHelper.cs (Editor script)
+[list]
+Chained.tsv (resource file)
+[list]
+Unchained.tsv (resource file)
+
+[footer]
+Tag: Translation System, Unity Plugin, Game Tools
