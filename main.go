@@ -14,6 +14,17 @@ func addPage(pg *[]xdparser.PageData, filename string) {
 	*pg = append(*pg, page)
 }
 
+func generatePageNavigation(chapterTexts []string) string {
+	var links strings.Builder
+
+	for _, ct := range chapterTexts {
+		link := fmt.Sprintf (`<a href="#%s">%s</a>`, ct, ct)
+		links.WriteString(link)
+	}
+
+	return fmt.Sprintf(blog.PageNavigation, links.String())
+}
+
 func main() {
 	// NOTE: Generate index HTML
 	index := xdparser.PageData{}
@@ -39,15 +50,7 @@ func main() {
 
 		fmt.Println(fileName)
 		title, date, body, footer := pg.GenerateHTML()
-
-		// NOTE: Generate pageNavigation
-		var links strings.Builder
-		for _, ct := range pg.ChapterTexts {
-			fmt.Println("XD : ",links.String())
-			link := fmt.Sprintf (`<a href="#%s">%s</a>`, ct, ct)
-			links.WriteString(link)
-		}
-		truePageNavigation := fmt.Sprintf(blog.PageNavigation, links.String())
+		truePageNavigation := generatePageNavigation(pg.ChapterTexts)
 
 		content := fmt.Sprintf(blog.Main, title, date, truePageNavigation, body, footer)
 		blog.WriteHTML(content, fileName)
@@ -83,6 +86,7 @@ func main() {
 	gamesPage.ReadXDFileNative("./static/xdfiles/games.xd")
 
 	t, d, b, f := gamesPage.GenerateHTML()
-	gamesContent := fmt.Sprintf(blog.Main, t, d, "",  b, f)
+	gamesPageNavigation := generatePageNavigation(gamesPage.ChapterTexts)
+	gamesContent := fmt.Sprintf(blog.Main, t, d, gamesPageNavigation, b, f)
 	blog.WriteHTML(gamesContent, "./templates/games.html")
 }

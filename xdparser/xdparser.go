@@ -142,8 +142,6 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 			case CHAPTER:
 				ct := strings.Clone(pd.Texts[textIndex])
 				pd.ChapterTexts = append(pd.ChapterTexts, ct)
-				fmt.Println("CT : ", ct)
-				// fmt.Println("Len : ", len(pd.ChapterTexts))
 				openTag = fmt.Sprintf(openTag,  "\"" + ct + "\"" )
 			case CODE:
 				if strings.HasPrefix(pd.Texts[textIndex], escapePrefix) {
