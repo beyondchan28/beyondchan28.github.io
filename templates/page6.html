@@ -1,5 +1,6 @@
 <link rel="icon" type="image/x-icon" href="../static/icon.ico">
 <link rel="stylesheet" href="../static/style.css">
+<meta charset="UTF-8">
 </head>
 
 <body>
@@ -29,7 +30,7 @@ Published on Friday, October 9, 2026
 </div>
 
 <div class="post-body" id="body">
-<h2>
+<h2 id="Why This Exist">
 Why This Exist
 </h2><p>
 Unity have its official way on tackling localization/internationalization system. It is a comprhensive one, but for most indie games, the system is overkill for our own needs. It provide a lot of features that most indie games do not need. It also require some good amount of time to learn it. Even more, for most of us, localization is an afterthought. Most of us implement it after the game is done or add it on demand. Thus, we need a Translation system that easy to use, easy to learn, and easy to inject to our current projects.
@@ -37,13 +38,13 @@ Unity have its official way on tackling localization/internationalization system
 Thus, these are the reason why this plugin exist.
 </p><p>
 In this blog, i will teach you how to use this plugin from setup to display them inside Unity.
-</p><h2>
+</p><h2 id="Installation and What's Inside">
 Installation and What's Inside
 </h2><p>
 To install, you just need to download and drop the unitypackage file into your project.
 </p><p>
 The package itself not only including localization system, but also a Helper editor script to make your life easier when using the system. It contains TSV file importer, auto generate enums, and gather _key_ from component (this _key_ will be explained further below). This allows you to make changes quicker.
-</p><h2>
+</p><h2 id="Setup Your Translations">
 Setup Your Translations
 </h2><p>
 First of all, set every text components such as TextMeshProUGUI component to unique _key_ like the image below.
@@ -79,7 +80,7 @@ After the spreadsheet ready, just copy and paste "Unchained Text" and "Chained T
 		<figcaption>Generate Enums and Its Results
 </figcaption></figure><p>
 Press "CTRL + R" to refresh the assets file if you don't see your project, but if you see the TSV files, then hit the "Simple Translation/Generate Enum". This will overwrite _Language enum_ and _ChainedTextKey enum_ inside TranslationEnums.cs file.
-</p><h2>
+</p><h2 id="Usage">
 Usage
 </h2><p>
 The usege is simple, attach SimpleTranslation script to a singleton gameobject (a gameobject that have script calling DontDestroyOnLoad attach to it). But, if you want to the script to behave as singleton, you just have to enable isDestroyOnLoad property in the inspector. Also, you can enable setLanguageBasedOnDevice to setup the language first based on
@@ -105,7 +106,7 @@ For Chained Text, it should be handled manually. Call GetChainedTextList method 
 After that, if you run the game, you will notice that the all _key_ for Unchained Text and Chained Text that you have setup has changed to its according words. The system also handling it automatically every time scene changed.
 </p><p>
 And that's all. Eazy peazy.
-</p><h2>
+</p><h2 id="Bonus">
 Bonus
 </h2><p>
 Did you know that UnityHub is built with Electron. If you don't know Electron, it is a framework to build desktop app with JavaScript. Which means if it runs, it relies on Chromium or a whole browser. As you might know, browser like Chrome can took a lot of your memory and this is also happening with UnityHub. It's crazy to think that an application that used mostly only for opening your project use a lot of memory (i ever encounter UnityHub consume more than 1 GB RAM when it only idling in the background). It is insanely unnecessary use of memory.
@@ -118,10 +119,10 @@ But, you don't need to worry. We can open our project without using UnityHub and
 		<div class="code">
 		<div class="line-numbers"></div>
 		<pre class="code-content">
-nohup /home/<USER>/Unity/Hub/Editor/<EDITOR VERSION>/Editor/Unity -projectPath "/path/to/your/project/folder/" &
+nohup /home/<USER>/Unity/Hub/Editor/&ltEDITOR VERSION>/Editor/Unity -projectPath "/path/to/your/project/folder/" &
 
 
-"C:\Program Files\Unity\Hub\Editor\<EDITOR VERSION>\Unity.exe" -projectPath "path\to\your\project\folder"
+"C:\Program Files\Unity\Hub\Editor\&ltEDITOR VERSION>\Unity.exe" -projectPath "path\to\your\project\folder"
 </pre></div></div><p>
 Just write this once (top line in .sh file for Linux and bottom line in .bat file for Windows) and run it by double click or inside a terminal. That's it ! A good chunk memory saved !
 </p><p>
@@ -130,7 +131,7 @@ You're welcome :D
 References:
 </p><li>
 Open Source Chinese, Japanese, and Korean Fonts : https://github.com/adobe-fonts/source-han-serif/tree/release/
-</li><h2>
+</li><h2 id="API References">
 API References
 </h2><h3>
 Global Enums
@@ -168,7 +169,7 @@ void SetText()
 Virtual Functions
 </h3><li>void SetupOnStart()</li><li>void NextText()</li><li>
 void OnLanguageChanged()
-</li><h2>
+</li><h2 id="Core Files">
 Core Files
 </h2><li>BeyondddTranslation.cs</li><li>ChainedText.cs</li><li>BeyondddHelper.cs (Editor script)</li><li>Chained.tsv (resource file)</li><li>
 Unchained.tsv (resource file)

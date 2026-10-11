@@ -110,9 +110,9 @@ On this day and age of expensive RAM, memory is really precious. people who runs
 But, you don't need to worry. We can open our project without using UnityHub and saves that unnecessary cost.
 
 [code]
-nohup /home/<USER>/Unity/Hub/Editor/<EDITOR VERSION>/Editor/Unity -projectPath "/path/to/your/project/folder/" &
+nohup /home/<USER>/Unity/Hub/Editor/&ltEDITOR VERSION>/Editor/Unity -projectPath "/path/to/your/project/folder/" &
 
-"C:\Program Files\Unity\Hub\Editor\<EDITOR VERSION>\Unity.exe" -projectPath "path\to\your\project\folder"
+"C:\Program Files\Unity\Hub\Editor\&ltEDITOR VERSION>\Unity.exe" -projectPath "path\to\your\project\folder"
 
 [paragraph]
 Just write this once (top line in .sh file for Linux and bottom line in .bat file for Windows) and run it by double click or inside a terminal. That's it ! A good chunk memory saved !

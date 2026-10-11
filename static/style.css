@@ -274,3 +274,38 @@ footer {
     color: #fff;
     cursor: pointer;
 }
+
+.page-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 24px 0;
+  padding-left: 12px;
+  border-left: 1px solid #333;
+}
+
+.page-nav-title {
+  margin-bottom: 8px;
+  color: #888;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.page-nav a {
+  padding: 6px 10px;
+  color: #999;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.page-nav a:hover {
+  color: #fff;
+  background: #222;
+}
+
+/*html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}*/

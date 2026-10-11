@@ -89,7 +89,7 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 		openTag = "<i>"
 		closeTag = "</i>"
 	case CHAPTER:
-		openTag = "<h2>"
+		openTag = "<h2 id=%s>"
 		closeTag = "</h2>"
 	case SECTION:
 		openTag = "<h3>"
@@ -138,6 +138,7 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 	for idx, textIndex := range indexes {
 		//NOTE: special case before appending to text
 		switch flag {
+
 			case CODE:
 				if strings.HasPrefix(pd.Texts[textIndex], escapePrefix) {
 					pd.Texts[textIndex] = pd.Texts[textIndex][1:]
@@ -150,6 +151,8 @@ func (pd *PageData) generateTagAsString(flag Flag, indexes []int) string {
 
 		//NOTE: special case for some tags
 		switch flag {
+		case CHAPTER:
+			openTag = fmt.Sprintf(openTag,  "\"" + pd.Texts[textIndex] + "\"" )
 		case CODE:
 			if idx != len(indexes) - 1 {
 				text += "\n"

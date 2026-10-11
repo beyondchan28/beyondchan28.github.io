@@ -24,6 +24,7 @@ const templateJsPath string = "../static/script.js"
 
 var head string = `<link rel="icon" type="image/x-icon" href="%s">
 <link rel="stylesheet" href="%s">
+<meta charset="UTF-8">
 </head>
 
 <body>
