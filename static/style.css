@@ -305,7 +305,35 @@ footer {
   background: #222;
 }
 
-/*html {
+html {
   scroll-behavior: smooth;
-  scroll-padding-top: 24px;
-}*/
+}
+
+.back-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  font-size: 22px;
+  text-decoration: none;
+
+  opacity: 0.8;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  background: #333;
+}

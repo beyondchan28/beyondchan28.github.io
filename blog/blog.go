@@ -51,6 +51,7 @@ const PageNavigation string = `
 
 var foot string = `</div>
 </body>
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
 <footer>
 © 2026 Beyond The Screen | All Rights Reserved
 </footer>
