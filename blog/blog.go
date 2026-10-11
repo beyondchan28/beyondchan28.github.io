@@ -42,6 +42,13 @@ var head string = `<link rel="icon" type="image/x-icon" href="%s">
 <div class="container">
 `
 
+const PageNavigation string = `
+<nav class="page-nav">
+<span class="page-nav-title">ON THIS PAGE</span>
+%s
+</nav>
+`
+
 var foot string = `</div>
 </body>
 <footer>
@@ -52,12 +59,15 @@ var foot string = `</div>
 
 const Main string = ` <main class="main-content">
 
+
 <div class="post-header" id="title">
 %s
 <div class="post-meta" id="date">
 %s
 </div>
 </div>
+
+%s
 
 <div class="post-body" id="body">
 %s
@@ -83,6 +93,7 @@ func WriteHTML(content, filePath string) {
 		trueHead = fmt.Sprintf(head, templateIconPath, templateCssPath, templateHomePath, templateBlogPath, templateGamesPath)
 		trueFoot = fmt.Sprintf(foot, templateJsPath)
 	}
+
 	html :=  trueHead + content + trueFoot
 
 	err := os.WriteFile(filePath, []byte(html), 0644)
