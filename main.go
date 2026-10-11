@@ -5,6 +5,7 @@ import (
 	"github.com/beyondchan28/beyondchan28.github.io/blog"
 	"github.com/beyondchan28/beyondchan28.github.io/xdparser"
 	"strings"
+	"unicode"
 )
 
 func addPage(pg *[]xdparser.PageData, filename string) {
@@ -23,6 +24,21 @@ func generatePageNavigation(chapterTexts []string) string {
 	}
 
 	return fmt.Sprintf(blog.PageNavigation, links.String())
+}
+
+func getHtmlFileName(blogTitle string) string {
+	fileName := strings.ToLower(blogTitle)
+	fileName = strings.TrimPrefix(fileName, "<h1>")
+	fileName = strings.TrimSuffix(fileName, "</h1>")
+	fileName = strings.Map(func(r rune) rune {
+		if unicode.IsPunct(r) && r != '-' {
+			return -1 // Remove punctuation
+		}
+		return r
+	}, fileName)
+	fileName = strings.TrimSpace(fileName)
+	fileName = strings.Join(strings.Fields(fileName), "-")
+	return fileName
 }
 
 func main() {
@@ -45,22 +61,22 @@ func main() {
 	addPage(&pages, "page6")
 	addPage(&pages, "page7")
 
-	for idx, pg := range pages {
-		fileName := fmt.Sprintf("./templates/page%d.html", idx)
-
-		fmt.Println(fileName)
+	for _, pg := range pages {
 		title, date, body, footer := pg.GenerateHTML()
 		truePageNavigation := generatePageNavigation(pg.ChapterTexts)
-
 		content := fmt.Sprintf(blog.Main, title, date, truePageNavigation, body, footer)
-		blog.WriteHTML(content, fileName)
+
+		fileName := getHtmlFileName(title)
+		fmt.Println("Generate HTML : ", fileName)
+		filePath := fmt.Sprintf("./templates/%s.html", fileName)
+
+		blog.WriteHTML(content, filePath)
 	}
 
 	//NOTE: Create blogPage list
 	var blogPageList strings.Builder
 
-	for idx, pg := range pages {
-		pageId := idx
+	for _, pg := range pages {
 		var titleId int
 		var dateId int
 		for _, pageMap := range pg.PageMapArray {
@@ -71,7 +87,7 @@ func main() {
 			}
 		}
 
-		link := fmt.Sprintf(`<a href="./page%d.html">%s</a>`, pageId, pg.Texts[titleId])
+		link := fmt.Sprintf(`<a href="./%s.html">%s</a>`, getHtmlFileName(pg.Texts[titleId]), pg.Texts[titleId])
 		blogTitle := fmt.Sprintf(`<div class="blog-title">%s</div>`, link)
 		blogDate := fmt.Sprintf(`<div class="published-date">%s</div>`, pg.Texts[dateId])
 		blogItem := fmt.Sprintf(`<li class="blog-item">%s%s</li>`, blogTitle, blogDate)
